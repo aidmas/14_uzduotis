@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <title>"14 užduotis automobiliai"</title>
+    <style>
+        * {
+            border: 0;
+            padding: 0;
+        }
+
+        #konteineris{
+            margin: 5px;
+        }
+
+        #konteineris .container {
+            min-width: 800px;
+            margin: 0;
+        }
+
+        .col,
+        .col-1 {
+            border: 1px solid black;
+            padding: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="konteineris">
+
+        <form>
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <label class="aria-label" for="data">Data</label>
+                    <input id="input1" type="text" class="form-control mb-2" placeholder="Data">
+                </div>
+                <div class="col-auto">
+                    <label class="aria-label" for="data">Numeris</label>
+                    <input id="input2" type="text" class="form-control mb-2" placeholder="Numeris">
+                </div>
+                <div class="col-auto">
+                    <label class="aria-label" for="data">Atstumas(m)</label>
+                    <input id="input3" type="text" class="form-control mb-2" placeholder="Atstumas">
+                </div>
+                <div class="col-auto">
+                    <label class="aria-label" for="data">Laikas(s)</label>
+                    <input id="input4" type="text" class="form-control mb-2" placeholder="Laikas">
+                </div>
+            </div>
+        </form>
+
+        <button type="submit" class="btn btn-primary mb-2" onclick="ivesti()">Submit</button>
+
+        <div class="container" id="rez">
+            <div class="row" style="text-align: center; padding: auto 3px;">
+                <div class="col-1">
+                    Eil. NR.
+                </div>
+                <div class="col">
+                    DATA
+                </div>
+                <div class="col">
+                    AUTOMOBILIO NUMERIS
+                </div>
+                <div class="col">
+                    KELIAS METRAIS
+                </div>
+                <div class="col">
+                    KELIAS SEKUNDĖMIS
+                </div>
+                <div class="col">
+                    GREITIS KM/H
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var auto = [];
+        function ivesti() {
+            auto.push([
+                document.getElementById("input1").value,
+                document.getElementById("input2").value,
+                document.getElementById("input3").value,
+                document.getElementById("input4").value
+            ])
+            var ind = auto.length - 1;
+            if (ArPilnas(auto)) {
+                var tekstas = "";
+                tekstas += '<div class="row">';
+                tekstas += stulpelis(ind + 1, false);
+                tekstas += stulpelis(auto[ind][0], true);
+                tekstas += stulpelis(auto[ind][1], true);
+                tekstas += stulpelis(auto[ind][2], true);
+                tekstas += stulpelis(auto[ind][3], true);
+                tekstas += stulpelis(Math.round(auto[ind][2] / auto[ind][3] / 3.6), true);
+                tekstas += '</div>';
+                document.getElementById("rez").innerHTML += tekstas;
+            }
+        }
+
+        function stulpelis(reiksme, arMasyvElement) {
+            var td = (arMasyvElement ? '<div class="col">' : '<div class="col-1">') + reiksme + '</div>';
+            return td;
+        }
+
+        function ArPilnas(auto) {
+            for (i = 0; i < auto[auto.length - 1].length; i++) {
+                if (auto[auto.length - 1][i] == false) return false;
+            }
+            return true;
+        }
+
+    </script>
+</body>
+
+</html>
